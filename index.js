@@ -45,6 +45,8 @@ builder.defineCatalogHandler(() => {
 
 builder.defineMetaHandler(async ({ id }) => {
 
+console.log("META PEDIDA:", id);
+
   const episodes = await getEpisodes();
 
   return Promise.resolve({
