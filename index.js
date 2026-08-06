@@ -55,6 +55,7 @@ meta: {
       type: "series",
       name: "Choushinsei Flashman",
       description: "Serie Super Sentai Flashman",
+poster: "https://image.tmdb.org/t/p/w500/mKoZUWBPMRa7sFBWMPuusTBBmS1.jpg",
 
       videos: episodes.map((ep, index) => ({
         id: `flashman-${index + 1}`,
