@@ -11,6 +11,10 @@
   "types": [
     "series"
   ],
+"idPrefixes": [
+"choushinsei"
+
+ ],
   "catalogs": [
     {
       "type": "series",
