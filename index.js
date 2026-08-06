@@ -30,7 +30,7 @@ if (req.url.startsWith("/catalog/series/shadowrangers-series.json")) {
           id: "choushinsei-flashman",
           type: "series",
           name: "Choushinsei Flashman",
-          poster: ""
+          poster: "https://www.themoviedb.org/t/p/w1280/mKoZUWBPMRa7sFBWMPuusTBBmS1.jpg"
         }
       ]
     };
