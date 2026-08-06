@@ -1,0 +1,21 @@
+{
+  "id": "org.shadowrangers.addon",
+  "version": "1.0.0",
+  "name": "ShadowRangers Addon",
+  "description": "Series y capítulos de ShadowRangers para Stremio",
+  "resources": [
+    "catalog",
+    "meta",
+    "stream"
+  ],
+  "types": [
+    "series"
+  ],
+  "catalogs": [
+    {
+      "type": "series",
+      "id": "shadowrangers-series",
+      "name": "ShadowRangers"
+    }
+  ]
+}

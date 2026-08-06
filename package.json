@@ -1,0 +1,12 @@
+{
+  "name": "shadow-addon",
+  "version": "1.0.0",
+  "description": "Addon de Stremio",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0"
+  }
+}
