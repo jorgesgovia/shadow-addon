@@ -59,6 +59,8 @@ console.log("META PEDIDA:", id);
       videos: episodes.map((ep, index) => ({
         id: `flashman-${index + 1}`,
         title: ep.title,
+season: 1,
+episode: index + 1,
         released: ep.date
       }))
     }
