@@ -70,6 +70,8 @@ episode: index + 1,
 
 builder.defineStreamHandler(async ({ id }) => {
 
+console.log(STREAM PEDIDO:", id);
+
   const number = id.match(/flashman-(\d+)/);
 
   const episodes = await getEpisodes();
