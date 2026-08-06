@@ -45,29 +45,28 @@ builder.defineCatalogHandler(() => {
 
 builder.defineMetaHandler(async ({ id }) => {
 
-console.log("META PEDIDA:", id);
+  console.log("META PEDIDA:", id);
 
   const episodes = await getEpisodes();
 
-  return Promise.resolve({
-meta: {
+  return {
+    meta: {
       id: "shadowrangers-flashman",
       type: "series",
       name: "Choushinsei Flashman",
       description: "Serie Super Sentai Flashman",
-poster: "https://image.tmdb.org/t/p/w500/mKoZUWBPMRa7sFBWMPuusTBBmS1.jpg",
+      poster: "https://image.tmdb.org/t/p/w500/mKoZUWBPMRa7sFBWMPuusTBBmS1.jpg",
 
       videos: episodes.map((ep, index) => ({
         id: `flashman-${index + 1}`,
         title: ep.title,
-name: ep.title,
-season: 1,
-episode: index + 1,
+        name: ep.title,
+        season: 1,
+        episode: index + 1,
         released: ep.date
       }))
-    
-}
-  });
+    }
+  };
 });
 
 
