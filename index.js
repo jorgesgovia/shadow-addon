@@ -27,7 +27,7 @@ if (req.url.startsWith("/catalog/series/shadowrangers-series.json")) {
     const catalog = {
       metas: [
         {
-          id: "choushinsei-flashman",
+          id: "shadowrangers-flashman",
           type: "series",
           name: "Choushinsei Flashman",
           poster: "https://www.themoviedb.org/t/p/w1280/mKoZUWBPMRa7sFBWMPuusTBBmS1.jpg"
