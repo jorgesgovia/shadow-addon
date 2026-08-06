@@ -11,9 +11,11 @@ const manifest = JSON.parse(
 const server = createServer(async (req, res) => {
 
   if (req.url === "/manifest.json") {
-    res.writeHead(200, {
-      "Content-Type": "application/json"
-    });
+
+res.writeHead(200, {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*"
+});
 
     res.end(JSON.stringify(manifest));
     return;
