@@ -10,6 +10,7 @@ const manifest = JSON.parse(
 
 const server = createServer(async (req, res) => {
 
+console.log("PETICIÓN:", req.url);
   if (req.url === "/manifest.json") {
 
 res.writeHead(200, {
