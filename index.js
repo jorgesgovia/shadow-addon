@@ -50,7 +50,7 @@ console.log("META PEDIDA:", id);
   const episodes = await getEpisodes();
 
   return Promise.resolve({
-    meta: {
+
       id: "shadowrangers-flashman",
       type: "series",
       name: "Choushinsei Flashman",
@@ -63,7 +63,7 @@ season: 1,
 episode: index + 1,
         released: ep.date
       }))
-    }
+    
   });
 });
 
