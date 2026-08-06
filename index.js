@@ -63,7 +63,9 @@ if (req.url.startsWith("/catalog/series/shadowrangers-series.json")) {
       "Content-Type": "application/json"
     });
 
-    res.end(JSON.stringify(meta));
+    res.end(JSON.stringify({
+meta
+}));
     return;
   }
 
