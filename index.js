@@ -19,6 +19,10 @@ const builder = new addonBuilder({
     "series"
   ],
 
+idPrefixes: [
+  "shadowrangers-"
+],
+
   catalogs: [
     {
       type: "series",
