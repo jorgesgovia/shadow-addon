@@ -66,6 +66,7 @@ console.log("META ENVIADA:", JSON.stringify({
         id: `flashman-${index + 1}`,
         title: ep.title,
         name: ep.title,
+type: "series",
         season: 1,
         episode: index + 1,
         released: ep.date
