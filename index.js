@@ -60,7 +60,7 @@ console.log("META ENVIADA:", JSON.stringify({
 
   return {
     meta: {
-      id: id,
+      id: "shadowrangers-flashman",
       type: "series",
       name: "Choushinsei Flashman",
       description: "Serie Super Sentai Flashman",
