@@ -49,9 +49,14 @@ builder.defineMetaHandler(async ({ id }) => {
 
   const episodes = await getEpisodes();
 
+console.log("META ENVIADA:", JSON.stringify({
+  id: "shadowrangers-flashman",
+  videos: episodes.length
+}));
+
   return {
     meta: {
-      id: "shadowrangers-flashman",
+      id: id,
       type: "series",
       name: "Choushinsei Flashman",
       description: "Serie Super Sentai Flashman",
