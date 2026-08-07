@@ -73,7 +73,6 @@ console.log("META ENVIADA:", JSON.stringify({
 type: "series",
         season: 1,
         episode: index + 1,
-        released: ep.date
       }))
     }
   };
