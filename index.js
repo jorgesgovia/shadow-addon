@@ -59,25 +59,19 @@ console.log("META ENVIADA:", JSON.stringify({
 }));
 
   return {
-    meta: {
-      id: "shadowrangers-flashman",
-      type: "series",
-      name: "Choushinsei Flashman",
-      description: "Serie Super Sentai Flashman",
-      poster: "https://image.tmdb.org/t/p/w500/mKoZUWBPMRa7sFBWMPuusTBBmS1.jpg",
-
-      videos: episodes.map((ep, index) => ({
-        id: `${id}:1:${index + 1}`,
-        title: ep.title,
-        name: ep.title,
-type: "series",
-        season: 1,
-        episode: index + 1,
-      }))
-    }
-  };
+  meta: {
+    id: "shadowrangers-flashman",
+    type: "series",
+    name: "Choushinsei Flashman",
+    videos: episodes.map((ep, index) => ({
+      id: `flashman-${index + 1}`,
+      title: ep.title,
+      season: 1,
+      episode: index + 1
+    }))
+  }
+};
 });
-
 
 builder.defineStreamHandler(async ({ id }) => {
 
