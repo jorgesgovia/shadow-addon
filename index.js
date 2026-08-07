@@ -10,17 +10,17 @@ const builder = new addonBuilder({
   description: "Series y capítulos de ShadowRangers para Stremio",
 
   resources: [
-    "catalog",
-    "meta",
-    "stream"
-  ],
+  "catalog",
+  {
+    name: "meta",
+    types: ["series"],
+    idPrefixes: ["shadowrangers-"]
+  },
+  "stream"
+],
 
-  types: [
-    "series"
-  ],
-
-idPrefixes: [
-  "shadowrangers-"
+types: [
+  "series"
 ],
 
   catalogs: [
