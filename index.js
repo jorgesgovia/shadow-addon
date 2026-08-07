@@ -63,7 +63,7 @@ console.log("META ENVIADA:", JSON.stringify({
       poster: "https://image.tmdb.org/t/p/w500/mKoZUWBPMRa7sFBWMPuusTBBmS1.jpg",
 
       videos: episodes.map((ep, index) => ({
-        id: `flashman-${index + 1}`,
+        id: `${id}:1:${index + 1}`,
         title: ep.title,
         name: ep.title,
 type: "series",
