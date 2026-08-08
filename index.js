@@ -75,22 +75,40 @@ console.log("META ENVIADA:", JSON.stringify({
 
 builder.defineStreamHandler(async ({ id }) => {
 
-console.log("STREAM PEDIDO:", id);
+  console.log("STREAM PEDIDO:", id);
 
   const number = id.match(/flashman-(\d+)/);
 
-  const episodes = await getEpisodes();
+  if (!number) {
+    return { streams: [] };
+  }
 
+  const episodes = await getEpisodes();
   const episode = episodes[Number(number[1]) - 1];
 
-  return Promise.resolve({
+  if (!episode) {
+    return { streams: [] };
+  }
+
+  const response = await fetch(episode.link);
+  const html = await response.text();
+
+  const voe = html.match(/https:\/\/voe\.sx\/e\/[^"'\s<]+/);
+
+  console.log("VOE ENCONTRADO:", voe ? voe[0] : "NO ENCONTRADO");
+
+  if (!voe) {
+    return { streams: [] };
+  }
+
+  return {
     streams: [
       {
         title: episode.title,
-        url: episode.link
+        url: voe[0]
       }
     ]
-  });
+  };
 });
 
 
