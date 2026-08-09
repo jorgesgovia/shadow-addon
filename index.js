@@ -5,7 +5,7 @@ const { addonBuilder, serveHTTP } = sdk;
 const FLASHMAN_METADATA = {
   poster: "https://image.tmdb.org/t/p/w500/mKoZUWBPMRa7sFBWMPuusTBBmS1.jpg",
   background: "https://image.tmdb.org/t/p/original/69ZOUqhfdSV8Ff3u7iz4P3NlETG.jpg",
-  description: "In 1966, five infant children were kidnapped by an alien group known as the Alien Hunters for the Reconstructive Experiment Empire Mess, who wanted samples of humans from Earth to experiment on. The children were rescued by Mess' arch enemy, the Flash alien race, which took each one to a different planet of the Flash solar system for training. Each child was trained separately in a range of superpowers that will allow them to fight Mess, their bodies also adapted to the atmosphere of the Flash Solar System making them gain special abilities. When they finally return to Earth in 1986 to combat Mess, who is now trying to invade it, they use the opportunity to search for their birth parents.",
+  description: "En 1986, cinco jóvenes criados y rescatados por la raza alienígena Flash, un archienemigo de los secuestradores conocidos como el imperio Mess, regresan a la Tierra como un equipo conocido como Supernova Flashman para combatir y descubrir sus verdaderos orígenes.",
   genres: ["Action", "Adventure", "Science Fiction"],
   year: 1986,
   country: ["JP"],
@@ -114,7 +114,7 @@ builder.defineMetaHandler(async ({ id }) => {
   ...(cinemeta?.poster ? { poster: cinemeta.poster } : {}),
   ...(cinemeta?.background ? { background: cinemeta.background } : {}),
   ...(cinemeta?.logo ? { logo: cinemeta.logo } : {}),
-  ...(cinemeta?.description ? { description: cinemeta.description } : {}),
+  description: FLASHMAN_METADATA.description,
   ...(cinemeta?.genres ? { genres: cinemeta.genres } : {}),
   ...(cinemeta?.year ? { year: cinemeta.year } : {}),
   ...(cinemeta?.country ? { country: cinemeta.country } : {}),
