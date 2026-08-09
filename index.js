@@ -132,5 +132,6 @@ behaviorHints: {
 });
       
 serveHTTP(builder.getInterface(), {
-  port: 7070
+  port: process.env.PORT || 7070,
+  host: "0.0.0.0"
 });
