@@ -1,6 +1,6 @@
 import sdk from "stremio-addon-sdk";
 import { createServer } from "node:http";
-const { addonBuilder, serveHTTP } = sdk;
+const { addonBuilder } = sdk;
 
 const FLASHMAN_METADATA = {
   poster: "https://image.tmdb.org/t/p/w500/mKoZUWBPMRa7sFBWMPuusTBBmS1.jpg",
@@ -114,7 +114,7 @@ builder.defineStreamHandler(async ({ id }) => {
     streams: [
       {
         title: episode.title,
-        url: `http://127.0.0.1:7071/play/${number[1]}`,
+url: `${BASE_URL}/play/${number[1]}`,
         behaviorHints: {
           notWebReady: true
         }
@@ -123,55 +123,67 @@ builder.defineStreamHandler(async ({ id }) => {
   };
 });
 
-serveHTTP(builder.getInterface(), {
-  port: 7070
-});
+const PORT = process.env.PORT || 7070;
+const BASE_URL = process.env.RENDER_EXTERNAL_URL || `http://127.0.0.1:${PORT}`;
 
-const playServer = createServer(async (req, res) => {
-  const match = req.url.match(/^\/play\/(\d+)$/);
+const router = sdk.getRouter(builder.getInterface());
 
-  if (!match) {
-    res.writeHead(404);
-    res.end("Not found");
+const server = createServer(async (req, res) => {
+  if (req.url.startsWith("/play/")) {
+    const match = req.url.match(/^\/play\/(\d+)$/);
+
+    if (!match) {
+      res.writeHead(404);
+      res.end("Not found");
+      return;
+    }
+
+    try {
+      const episodes = await getEpisodes();
+      const episode = episodes[Number(match[1]) - 1];
+
+      if (!episode) {
+        res.writeHead(404);
+        res.end("Episode not found");
+        return;
+      }
+
+      console.log("▶️ PLAY SOLICITADO:", episode.title);
+
+      const videoUrl = await resolverVideo(episode.link);
+
+      console.log("🎥 VIDEO RESUELTO:", videoUrl);
+
+      if (!videoUrl) {
+        res.writeHead(500);
+        res.end("No se pudo resolver el video");
+        return;
+      }
+
+      res.writeHead(302, {
+        Location: videoUrl
+      });
+
+      res.end();
+
+    } catch (error) {
+      console.error("❌ ERROR AL REPRODUCIR:", error);
+
+      res.writeHead(500);
+      res.end("Error resolviendo video");
+    }
+
     return;
   }
 
-  try {
-    const episodes = await getEpisodes();
-    const episode = episodes[Number(match[1]) - 1];
-
-    if (!episode) {
-      res.writeHead(404);
-      res.end("Episode not found");
-      return;
-    }
-
-    console.log("▶️ PLAY SOLICITADO:", episode.title);
-
-    const videoUrl = await resolverVideo(episode.link);
-
-    console.log("🎥 VIDEO RESUELTO:", videoUrl);
-
-    if (!videoUrl) {
-      res.writeHead(500);
-      res.end("No se pudo resolver el video");
-      return;
-    }
-
-    res.writeHead(302, {
-      Location: videoUrl
-    });
-
-    res.end();
-
-  } catch (error) {
-    console.error("❌ ERROR AL REPRODUCIR:", error);
-
-    res.writeHead(500);
-    res.end("Error resolviendo video");
-  }
+  router(req, res, () => {
+    res.writeHead(404);
+    res.end("Not found");
+  });
 });
 
-playServer.listen(7071, () => {
-  console.log("▶️ Play server activo en http://127.0.0.1:7071");
+server.listen(PORT, () => {
+  console.log(`🚀 Super Sentai Addon activo en puerto ${PORT}`);
+  console.log(`🌐 Base URL: ${BASE_URL}`);
 });
+
