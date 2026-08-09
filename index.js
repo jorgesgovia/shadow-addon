@@ -14,6 +14,26 @@ const FLASHMAN_METADATA = {
 
 import { getEpisodes } from "./scraper.js";
 import { resolverDrive } from "./resolver-drive.js";
+const CINEMETA_URL =
+  "https://v3-cinemeta.strem.io/meta/series/tt0090407.json";
+
+async function obtenerMetadataCinemeta() {
+  try {
+    const response = await fetch(CINEMETA_URL);
+
+    if (!response.ok) {
+      console.log("⚠️ Cinemeta respondió:", response.status);
+      return null;
+    }
+
+    const data = await response.json();
+    return data.meta || null;
+  } catch (error) {
+    console.log("⚠️ Error consultando Cinemeta:", error.message);
+    return null;
+  }
+}
+
 
 const builder = new addonBuilder({
   id: "org.shadowrangers.addon",
@@ -60,36 +80,61 @@ builder.defineCatalogHandler(() => {
 
 
 builder.defineMetaHandler(async ({ id }) => {
-
- console.log("META PEDIDA:", id);
+  console.log("META PEDIDA:", id);
 
   const episodes = await getEpisodes();
-console.log("PRIMER EPISODIO:", JSON.stringify(episodes[0], null, 2));
+  console.log("PRIMER EPISODIO:", JSON.stringify(episodes[0], null, 2));
+
+  const cinemeta = await obtenerMetadataCinemeta();
+
+  if (cinemeta) {
+    console.log("✅ Metadata obtenida de Cinemeta");
+    console.log("⭐ IMDb:", cinemeta.imdbRating);
+    console.log("🏷️ Logo:", cinemeta.logo);
+  } else {
+    console.log("⚠️ Cinemeta no disponible; usando metadata local");
+  }
+
+  const metaBase = {
+  id: "shadowrangers-flashman",
+  type: "series",
+  name: cinemeta?.name || "Choushinsei Flashman",
+  ...FLASHMAN_METADATA,
+  ...(cinemeta?.poster ? { poster: cinemeta.poster } : {}),
+  ...(cinemeta?.background ? { background: cinemeta.background } : {}),
+  ...(cinemeta?.logo ? { logo: cinemeta.logo } : {}),
+  ...(cinemeta?.description ? { description: cinemeta.description } : {}),
+  ...(cinemeta?.genres ? { genres: cinemeta.genres } : {}),
+  ...(cinemeta?.year ? { year: cinemeta.year } : {}),
+  ...(cinemeta?.country ? { country: cinemeta.country } : {}),
+  ...(cinemeta?.imdbRating ? { imdbRating: cinemeta.imdbRating } : {}),
+  ...(cinemeta?.imdb_id ? { imdb_id: cinemeta.imdb_id } : {})
+};
 
 console.log("META ENVIADA:", JSON.stringify({
-  id: "shadowrangers-flashman",
-  videos: episodes.length
-}));
+    id: metaBase.id,
+    name: metaBase.name,
+    logo: metaBase.logo,
+    imdbRating: metaBase.imdbRating,
+    videos: episodes.length
+  }));
 
   return {
-  meta: {
-    id: "shadowrangers-flashman",
-  type: "series",
-  name: "Choushinsei Flashman",
-  ...FLASHMAN_METADATA,
-videos: episodes.map((ep, index) => ({
-  id: `flashman-${index + 1}`,
-  title: ep.title,
-  season: 1,
-  episode: index + 1,
-  released: new Date(ep.date).toISOString(),
-  thumbnail: ep.thumbnail,
-overview: ep.description,
-  runtime: ep.runtime
-}))    
+    meta: {
+      ...metaBase,
 
-  }
-};
+      videos: episodes.map((ep, index) => ({
+        id: `flashman-${index + 1}`,
+        title: ep.title,
+        season: 1,
+        episode: index + 1,
+        released: new Date(ep.date).toISOString(),
+        thumbnail: ep.thumbnail,
+        overview: ep.description,
+        runtime: ep.runtime
+      }))
+    }
+  };
 });
 
 builder.defineStreamHandler(async ({ id }) => {
@@ -122,8 +167,9 @@ return {
     {
       title: episode.title,
       url: videoUrl,
-behaviorHints: {
-        notWebReady: true
+      behaviorHints: {
+        notWebReady: true,
+        poster: "https://image.tmdb.org/t/p/original/7jASxo9DcEkuhCQhuJpgkmjoTgt.png"
       }
     }
   ]
