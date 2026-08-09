@@ -1,2 +1,8 @@
-node_modules
-.env
+node_modules/
+*.html
+*.txt
+*-backup.js
+diagnostico*.js
+prueba*.js
+test*.js
+video-url.txt
