@@ -122,7 +122,21 @@ builder.defineMetaHandler(async ({ id }) => {
   ...(cinemeta?.imdb_id ? { imdb_id: cinemeta.imdb_id } : {}),
 ...(cinemeta?.cast ? { cast: cinemeta.cast } : {}),
 ...(cinemeta?.runtime ? { runtime: cinemeta.runtime } : {}),
-...(cinemeta?.releaseInfo ? { releaseInfo: cinemeta.releaseInfo } : {})
+...(cinemeta?.releaseInfo ? { releaseInfo: cinemeta.releaseInfo } : {}),
+...(cinemeta?.released ? { released: cinemeta.released } : {}),
+...(cinemeta?.status ? { status: cinemeta.status } : {}),
+...(cinemeta?.tvdb_id ? { tvdb_id: cinemeta.tvdb_id } : {}),
+...(cinemeta?.moviedb_id ? { moviedb_id: cinemeta.moviedb_id } : {}),
+...(cinemeta?.popularities ? { popularities: cinemeta.popularities } : {}),
+...(cinemeta?.popularity ? { popularity: cinemeta.popularity } : {}),
+...(cinemeta?.genre ? { genre: cinemeta.genre } : {}),
+...(cinemeta?.director?.length ? { director: cinemeta.director } : {}),
+...(cinemeta?.writer?.length ? { writer: cinemeta.writer } : {}),
+...(cinemeta?.awards ? { awards: cinemeta.awards } : {}),
+...(cinemeta?.trailers?.length ? { trailers: cinemeta.trailers } : {}),
+...(cinemeta?.trailerStreams?.length ? { trailerStreams: cinemeta.trailerStreams } : {}),
+...(cinemeta?.links?.length ? { links: cinemeta.links } : {}),
+...(cinemeta?.behaviorHints ? { behaviorHints: cinemeta.behaviorHints } : {})
 };
 
 console.log("META ENVIADA:", JSON.stringify({
