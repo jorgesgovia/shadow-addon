@@ -65,19 +65,30 @@ types: [
 });
 
 
-builder.defineCatalogHandler(() => {
-  return Promise.resolve({
+builder.defineCatalogHandler(async () => {
+  const cinemeta = await obtenerMetadataCinemeta();
+
+  return {
     metas: [
       {
         id: "shadowrangers-flashman",
         type: "series",
-        name: "Choushinsei Flashman",
-        ...FLASHMAN_METADATA
+        name: cinemeta?.name || "Choushinsei Flashman",
+        poster: cinemeta?.poster,
+        background: cinemeta?.background,
+        logo: cinemeta?.logo,
+        description: cinemeta?.description,
+        genres: cinemeta?.genres,
+        releaseInfo: cinemeta?.releaseInfo || cinemeta?.year,
+        country: cinemeta?.country,
+        imdbRating: cinemeta?.imdbRating,
+        imdb_id: cinemeta?.imdb_id,
+        runtime: cinemeta?.runtime,
+        cast: cinemeta?.cast
       }
     ]
-  });
+  };
 });
-
 
 builder.defineMetaHandler(async ({ id }) => {
   console.log("META PEDIDA:", id);
@@ -108,7 +119,10 @@ builder.defineMetaHandler(async ({ id }) => {
   ...(cinemeta?.year ? { year: cinemeta.year } : {}),
   ...(cinemeta?.country ? { country: cinemeta.country } : {}),
   ...(cinemeta?.imdbRating ? { imdbRating: cinemeta.imdbRating } : {}),
-  ...(cinemeta?.imdb_id ? { imdb_id: cinemeta.imdb_id } : {})
+  ...(cinemeta?.imdb_id ? { imdb_id: cinemeta.imdb_id } : {}),
+...(cinemeta?.cast ? { cast: cinemeta.cast } : {}),
+...(cinemeta?.runtime ? { runtime: cinemeta.runtime } : {}),
+...(cinemeta?.releaseInfo ? { releaseInfo: cinemeta.releaseInfo } : {})
 };
 
 console.log("META ENVIADA:", JSON.stringify({
