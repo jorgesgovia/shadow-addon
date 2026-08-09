@@ -49,9 +49,14 @@ export async function resolverVideo(urlCapitulo) {
 
     console.log("🖼️ Iframes encontrados:", iframes.length);
 
-    videoG = iframes.find(src =>
-      src.includes("blogger.com/video.g")
-    );
+console.log("🖼️ URLs DE IFRAMES:");
+for (const iframe of iframes) {
+  console.log("➡️", iframe);
+}
+
+videoG = iframes.find(src =>
+  src.includes("blogger.com/video.g")
+);
 
     if (!videoG) {
       throw new Error("No encontré Blogger video.g usando Chromium");
