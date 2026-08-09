@@ -173,6 +173,18 @@ builder.defineMetaHandler(async ({ id }) => {
   ...(cinemeta?.imdbRating ? { imdbRating: cinemeta.imdbRating } : {}),
   ...(cinemeta?.imdb_id ? { imdb_id: cinemeta.imdb_id } : {}),
 ...(cinemeta?.cast ? { cast: cinemeta.cast } : {}),
+trailers: [
+  {
+    source: "Q_oVf3qpwIk",
+    type: "Trailer"
+  }
+],
+trailerStreams: [
+  {
+    title: "Supernova Flashman",
+    ytId: "Q_oVf3qpwIk"
+  }
+],
 ...(cinemeta?.runtime ? { runtime: cinemeta.runtime } : {}),
 ...(cinemeta?.releaseInfo ? { releaseInfo: cinemeta.releaseInfo } : {}),
 ...(cinemeta?.released ? { released: cinemeta.released } : {}),
