@@ -5,8 +5,7 @@ const { addonBuilder, serveHTTP } = sdk;
 const FLASHMAN_METADATA = {
   poster: "https://image.tmdb.org/t/p/w500/mKoZUWBPMRa7sFBWMPuusTBBmS1.jpg",
   background: "https://image.tmdb.org/t/p/original/69ZOUqhfdSV8Ff3u7iz4P3NlETG.jpg",
-  description: "En 1986, cinco jóvenes criados y rescatados por la raza alienígena Flash, un archienemigo de los secuestradores conocidos como el imperio Mess, regresan a la Tierra como un equipo conocido como Supernova Flashman para combatir y descubrir sus verdaderos orígenes.",
-  genres: ["Action", "Adventure", "Science Fiction"],
+description: "En 1986, cinco jóvenes con poderes especiales regresan a la Tierra como Supernova Flashman para combatir al imperio Mess y descubrir sus verdaderos orígenes.",  genres: ["Action", "Adventure", "Science Fiction"],
   year: 1986,
   country: ["JP"],
   language: "ja"
