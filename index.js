@@ -164,7 +164,7 @@ builder.defineMetaHandler(async ({ id }) => {
   name: cinemeta?.name || "Choushinsei Flashman",
   ...FLASHMAN_METADATA,
   ...(cinemeta?.poster ? { poster: cinemeta.poster } : {}),
-  ...(cinemeta?.background ? { background: cinemeta.background } : {}),
+background: "https://m.media-amazon.com/images/S/pv-target-images/24310d53e01154750a2822a90586615615186dbbf640315112c7105934bf2411.jpg",
   ...(cinemeta?.logo ? { logo: cinemeta.logo } : {}),
   description: FLASHMAN_METADATA.description,
   ...(cinemeta?.genres ? { genres: cinemeta.genres } : {}),
